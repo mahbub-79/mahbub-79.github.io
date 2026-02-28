@@ -314,3 +314,20 @@ input:focus, textarea:focus{border-color: rgba(124,92,255,.55)}
 
 
 .profile-photo{width:116px;height:116px;border-radius:999px;object-fit:cover;display:block;margin:0 auto 14px auto;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+
+/* ===== Scroll reveal animations (stronger) ===== */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+}
+.reveal{
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  filter: blur(2px);
+  transition: opacity .75s ease, transform .75s ease, filter .75s ease;
+  will-change: opacity, transform, filter;
+}
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}

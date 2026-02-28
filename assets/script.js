@@ -1,55 +1,43 @@
-// Navbar toggle (mobile)
-const navToggle = document.getElementById("navToggle");
-const siteNav = document.getElementById("siteNav");
 
-if (navToggle && siteNav) {
-  navToggle.addEventListener("click", () => {
-    const isOpen = siteNav.classList.toggle("open");
-    navToggle.setAttribute("aria-expanded", String(isOpen));
+// ===== Scroll reveal (IntersectionObserver) =====
+(function(){
+  const addReveal = (selector) => {
+    document.querySelectorAll(selector).forEach(el => {
+      if(!el.classList.contains("reveal")) el.classList.add("reveal");
+    });
+  };
+
+  addReveal("section");
+  addReveal(".card");
+  addReveal(".video-card");
+  addReveal(".service-card");
+  addReveal(".project-card");
+  addReveal("header");
+  addReveal("footer");
+
+  const targets = Array.from(document.querySelectorAll(".reveal"));
+
+  requestAnimationFrame(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.style.transitionDelay = (Math.random()*0.12).toFixed(2) + "s";
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    targets.forEach(t => io.observe(t));
+
+    // Ensure above-the-fold items animate too
+    setTimeout(() => {
+      targets.forEach(t => {
+        const r = t.getBoundingClientRect();
+        if(r.top < window.innerHeight && r.bottom > 0){
+          t.classList.add("is-visible");
+        }
+      });
+    }, 200);
   });
-
-  // Close on outside click (mobile)
-  document.addEventListener("click", (e) => {
-    if (!siteNav.classList.contains("open")) return;
-    const target = e.target;
-    if (target instanceof Node && !siteNav.contains(target) && !navToggle.contains(target)) {
-      siteNav.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
-    }
-  });
-}
-
-// Footer year
-const yearEl = document.getElementById("year");
-if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-// Contact form -> mailto (works on GitHub Pages)
-const form = document.getElementById("contactForm");
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("name")?.value?.trim() || "";
-    const email = document.getElementById("email")?.value?.trim() || "";
-    const message = document.getElementById("message")?.value?.trim() || "";
-
-    const to = "mahbub.cedp@gmail.com";
-    const subject = encodeURIComponent(`Portfolio Contact: ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`
-    );
-
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-  });
-}
-
-// Simple scroll reveal
-const revealEls = document.querySelectorAll(".tile, .card, .project-card, .cta-box, .project-feature, .embed");
-revealEls.forEach(el => el.classList.add("reveal"));
-
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("show");
-  });
-}, { threshold: 0.12 });
-
-revealEls.forEach(el => io.observe(el));
+})();
