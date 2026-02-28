@@ -41,3 +41,15 @@ if (form) {
     window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
   });
 }
+
+// Simple scroll reveal
+const revealEls = document.querySelectorAll(".tile, .card, .project-card, .cta-box, .project-feature, .embed");
+revealEls.forEach(el => el.classList.add("reveal"));
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => io.observe(el));

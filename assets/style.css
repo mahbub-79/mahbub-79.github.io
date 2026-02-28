@@ -13,6 +13,7 @@
 
 *{box-sizing:border-box}
 html,body{height:100%}
+html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -244,6 +245,44 @@ input:focus, textarea:focus{border-color: rgba(124,92,255,.55)}
 .footer-links{display:flex; gap:14px; flex-wrap:wrap}
 .footer-links a{color: var(--muted); text-decoration:none}
 .footer-links a:hover{color: var(--text)}
+
+/* WhatsApp Floating Button */
+.wa-float{
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 999;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(15,22,36,.85);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 800;
+  box-shadow: 0 14px 30px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+  transition: transform .15s ease;
+}
+.wa-float:hover{ transform: translateY(-1px); }
+
+/* Facebook embed wrapper */
+.embed{
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  overflow:hidden;
+  background: rgba(255,255,255,.03);
+}
+.embed iframe{ width:100%; height:360px; display:block; }
+@media (max-width: 760px){ .embed iframe{ height:260px; } }
+
+/* Scroll reveal animation */
+.reveal{ opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.show{ opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+  html{ scroll-behavior:auto; }
+}
 
 @media (max-width: 920px){
   .hero-grid{grid-template-columns: 1fr; }
