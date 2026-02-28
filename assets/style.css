@@ -52,6 +52,23 @@ a{color:inherit}
 }
 .brand-text{font-weight:800; letter-spacing:.2px}
 
+.brand-badge{
+  margin-left:10px;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:700;
+  color:var(--text);
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+@media (max-width: 560px){
+  .brand-badge{display:none;}
+}
+
+
 .site-nav{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
 .site-nav a{
   text-decoration:none;
@@ -330,4 +347,41 @@ input:focus, textarea:focus{border-color: rgba(124,92,255,.55)}
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
+}
+
+
+
+/* ===== Responsive video embeds (Facebook) ===== */
+.video-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 900px){
+  .video-grid{ grid-template-columns: 1fr; }
+}
+
+/* 16:9 default */
+.video-frame{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+}
+
+/* For reels / vertical video */
+.video-frame.is-vertical{
+  aspect-ratio: 9 / 16;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.video-frame iframe{
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
 }
