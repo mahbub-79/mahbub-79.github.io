@@ -311,3 +311,6 @@ input:focus, textarea:focus{border-color: rgba(124,92,255,.55)}
   .site-nav a{padding:10px 12px}
   .hero-title{font-size:2.4rem}
 }
+
+
+.profile-photo{width:116px;height:116px;border-radius:999px;object-fit:cover;display:block;margin:0 auto 14px auto;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.35)}
