@@ -130,6 +130,7 @@ a{color:inherit}
 }
 .hero-title{font-size:3rem; line-height:1.1; margin:14px 0 6px}
 .hero-subtitle{font-size:1.35rem; margin:0 0 14px; color: rgba(232,238,252,.9)}
+.hero-role{font-size:1rem; margin:0 0 6px; color: rgba(232,238,252,.82)}
 .hero-desc{margin:0 0 18px; color: var(--muted)}
 .hero-cta{display:flex; gap:12px; flex-wrap:wrap; margin:18px 0 18px}
 
